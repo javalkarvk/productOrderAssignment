@@ -14,7 +14,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "product")
 @EntityListeners(AuditingEntityListener.class)
 public class Product {
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;

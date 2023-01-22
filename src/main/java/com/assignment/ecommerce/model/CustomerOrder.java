@@ -5,8 +5,15 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Entity
 @Table(name = "customer_order")
+@EntityListeners(AuditingEntityListener.class)
 public class CustomerOrder {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,17 +25,21 @@ public class CustomerOrder {
   @Column(name = "status")
   private String status;
   
+  @CreatedBy
   @Column(name = "created_by")
-  private String cretaedBy;
-  
-  @Column(name = "created_at")
-  private Date createdAt;
+  private String createdBy;
 
+  @CreatedDate
+  @Column(name = "created_date")
+  private Date createdDate;
+
+  @LastModifiedBy
   @Column(name = "modified_by")
   private String modifiedBy;
-  
-  @Column(name = "modified_at")
-  private Date modifiedAt;
+
+  @LastModifiedDate
+  @Column(name = "modified_date")
+  private Date modifiedDate;
   
   @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<OrderDetails> orderDetailsList;
@@ -66,22 +77,6 @@ public class CustomerOrder {
     this.status = status;
   }
 
-  public String getCretaedBy() {
-    return cretaedBy;
-  }
-
-  public void setCretaedBy(String cretaedBy) {
-    this.cretaedBy = cretaedBy;
-  }
-
-  public Date getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(Date createdAt) {
-    this.createdAt = createdAt;
-  }
-
   public String getModifiedBy() {
     return modifiedBy;
   }
@@ -89,13 +84,31 @@ public class CustomerOrder {
   public void setModifiedBy(String modifiedBy) {
     this.modifiedBy = modifiedBy;
   }
+  
+  
 
-  public Date getModifiedAt() {
-    return modifiedAt;
+  public String getCreatedBy() {
+	return createdBy;
   }
 
-  public void setModifiedAt(Date modifiedAt) {
-    this.modifiedAt = modifiedAt;
+  public void setCreatedBy(String createdBy) {
+	this.createdBy = createdBy;
+  }
+
+  public Date getCreatedDate() {
+	return createdDate;
+  }
+
+  public void setCreatedDate(Date createdDate) {
+	this.createdDate = createdDate;
+  }
+
+  public Date getModifiedDate() {
+	return modifiedDate;
+  }
+
+  public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
   }
 
   public List<OrderDetails> getOrderDetailsList() {
