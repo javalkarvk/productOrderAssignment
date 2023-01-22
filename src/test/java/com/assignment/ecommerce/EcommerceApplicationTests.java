@@ -1,10 +1,10 @@
-package com.bezkoder.spring.jpa.postgresql;
+package com.assignment.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootJpaPostgresqlApplicationTests {
+class EcommerceApplicationTests {
 
 	@Test
 	void contextLoads() {
