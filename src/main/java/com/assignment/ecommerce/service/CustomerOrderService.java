@@ -32,7 +32,7 @@ public class CustomerOrderService {
 	Map<String, Object> orderMap = new HashMap<>();
 	orderMap.put("order_no", order.getId());
 	orderMap.put("email_id", order.getEmail());
-	orderMap.put("order_date", order.getCreatedAt());
+	orderMap.put("order_date", order.getCreatedDate());
 	orderMap.put("status", order.getStatus());
 	List<OrderDetails> orderDetails = order.getOrderDetailsList();
 	List<Map<String, Object>> productsOrdered = new ArrayList<>();
