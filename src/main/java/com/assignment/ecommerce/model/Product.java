@@ -4,8 +4,15 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Entity
 @Table(name = "product")
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
 
   @Id
@@ -23,31 +30,27 @@ public class Product {
   
   @Column(name = "price")
   private Integer price;
-  
-  @Column(name = "created_by")
-  private String createdBy;
-  
-  @Column(name = "created_at")
-  private Date createdAt;
-
-  @Column(name = "modified_by")
-  private String modifiedBy;
-  
-  @Column(name = "modified_at")
-  private Date modifiedAt;
-  
-  @Column(name = "deleted_by")
-  private String deletedBy;
-  
-  @Column(name = "deleted_at")
-  private Date deletedAt;
 
   @Column(name = "is_deleted")
   private boolean isDeleted;
+  
+  @CreatedBy
+  @Column(name = "created_by")
+  private String createdBy;
 
-  public Product() {
+  @CreatedDate
+  @Column(name = "created_date")
+  private Date createdDate;
 
-  }
+  @LastModifiedBy
+  @Column(name = "modified_by")
+  private String modifiedBy;
+
+  @LastModifiedDate
+  @Column(name = "modified_date")
+  private Date modifiedDate;
+
+  public Product() {}
 
   public Product(String productName, String skuId, boolean deleted) {
     this.productName = productName;
@@ -95,59 +98,43 @@ public class Product {
     this.price = price;
   }
 
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String cretaedBy) {
-    this.createdBy = cretaedBy;
-  }
-
-  public Date getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(Date createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public String getModifiedBy() {
-    return modifiedBy;
-  }
-
-  public void setModifiedBy(String modifiedBy) {
-    this.modifiedBy = modifiedBy;
-  }
-
-  public Date getModifiedAt() {
-    return modifiedAt;
-  }
-
-  public void setModifiedAt(Date modifiedAt) {
-    this.modifiedAt = modifiedAt;
-  }
-
-  public String getDeletedBy() {
-    return deletedBy;
-  }
-
-  public void setDeletedBy(String deletedBy) {
-    this.deletedBy = deletedBy;
-  }
-
-  public Date getDeletedAt() {
-    return deletedAt;
-  }
-
-  public void setDeletedAt(Date deletedAt) {
-    this.deletedAt = deletedAt;
-  }
-
   public boolean getIsDeleted() {
     return isDeleted;
   }
 
   public void setIsDeleted(boolean isDeleted) {
     this.isDeleted = isDeleted;
+  }
+
+  public String getCreatedBy() {
+	return createdBy;
+  }
+	
+  public void setCreatedBy(String createdBy) {
+	this.createdBy = createdBy;
+  }
+	
+  public Date getCreatedDate() {
+	return createdDate;
+  }
+	
+  public void setCreatedDate(Date createdDate) {
+	this.createdDate = createdDate;
+  }
+	
+  public String getModifiedBy() {
+	return modifiedBy;
+  }
+	
+  public void setModifiedBy(String modifiedBy) {
+	this.modifiedBy = modifiedBy;
+  }
+	
+  public Date getModifiedDate() {
+	return modifiedDate;
+  }
+	
+  public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
   }
 }
