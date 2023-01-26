@@ -1,22 +1,26 @@
 package com.assignment.ecommerce.model;
 
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "customer_order")
 @EntityListeners(AuditingEntityListener.class)
-public class CustomerOrder {
+public class CustomerOrder extends Auditable<String> {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   
   @Column(name = "email")
@@ -25,28 +29,10 @@ public class CustomerOrder {
   @Column(name = "status")
   private String status;
   
-  @CreatedBy
-  @Column(name = "created_by")
-  private String createdBy;
-
-  @CreatedDate
-  @Column(name = "created_date")
-  private Date createdDate;
-
-  @LastModifiedBy
-  @Column(name = "modified_by")
-  private String modifiedBy;
-
-  @LastModifiedDate
-  @Column(name = "modified_date")
-  private Date modifiedDate;
-  
   @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<OrderDetails> orderDetailsList;
   
-  public CustomerOrder() {
-    
-  }
+  public CustomerOrder() {}
   
   public CustomerOrder(String email, String status) {
     setEmail(email);
@@ -75,40 +61,6 @@ public class CustomerOrder {
 
   public void setStatus(String status) {
     this.status = status;
-  }
-
-  public String getModifiedBy() {
-    return modifiedBy;
-  }
-
-  public void setModifiedBy(String modifiedBy) {
-    this.modifiedBy = modifiedBy;
-  }
-  
-  
-
-  public String getCreatedBy() {
-	return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-	this.createdBy = createdBy;
-  }
-
-  public Date getCreatedDate() {
-	return createdDate;
-  }
-
-  public void setCreatedDate(Date createdDate) {
-	this.createdDate = createdDate;
-  }
-
-  public Date getModifiedDate() {
-	return modifiedDate;
-  }
-
-  public void setModifiedDate(Date modifiedDate) {
-	this.modifiedDate = modifiedDate;
   }
 
   public List<OrderDetails> getOrderDetailsList() {

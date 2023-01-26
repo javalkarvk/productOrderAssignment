@@ -1,19 +1,21 @@
 package com.assignment.ecommerce.model;
 
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "order_details")
 @EntityListeners(AuditingEntityListener.class)
-public class OrderDetails {
+public class OrderDetails extends Auditable<String> {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
@@ -32,22 +34,6 @@ public class OrderDetails {
 
   @Column(name = "is_deleted")
   private boolean isDeleted;
-  
-  @CreatedBy
-  @Column(name = "created_by")
-  private String createdBy;
-
-  @CreatedDate
-  @Column(name = "created_date")
-  private Date createdDate;
-
-  @LastModifiedBy
-  @Column(name = "modified_by")
-  private String modifiedBy;
-
-  @LastModifiedDate
-  @Column(name = "modified_date")
-  private Date modifiedDate;
 
   @ManyToOne
   @JoinColumn(name = "order_id", insertable = false, updatable = false)
@@ -57,9 +43,7 @@ public class OrderDetails {
   @JoinColumn(name = "product_id", insertable = false, updatable = false)
   private Product product;
   
-  public OrderDetails() {
-    
-  }
+  public OrderDetails() {}
   
   public OrderDetails(int orderId, int productId, char status) {
     setOrderId(orderId);
@@ -114,39 +98,7 @@ public class OrderDetails {
   public void setDeleted(boolean isDeleted) {
     this.isDeleted = isDeleted;
   }
-  
-  public String getCreatedBy() {
-	  return createdBy;
-  }
 
-  public void setCreatedBy(String createdBy) {
-  	this.createdBy = createdBy;
-  }
-  
-  public Date getCreatedDate() {
-  	return createdDate;
-  }
-  
-  public void setCreatedDate(Date createdDate) {
-  	this.createdDate = createdDate;
-  }
-  
-  public String getModifiedBy() {
-  	return modifiedBy;
-  }
-  
-  public void setModifiedBy(String modifiedBy) {
-  	this.modifiedBy = modifiedBy;
-  }
-
-  public Date getModifiedDate() {
-  	return modifiedDate;
-  }
-  
-  public void setModifiedDate(Date modifiedDate) {
-  	this.modifiedDate = modifiedDate;
-  }
-  
   public CustomerOrder getCustomerOrder() {
 	return customerOrder;
   }
